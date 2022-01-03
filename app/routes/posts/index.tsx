@@ -1,8 +1,8 @@
-import {useLoaderData} from "remix";
+import {ActionFunction, json, LoaderFunction} from "remix";
 
-export const loader = () => {
+export const loader: LoaderFunction = () => {
 
-    const res = new Response(JSON.stringify([
+    return json([
         {
             slug: "my-first-post",
             title: "My First Post"
@@ -11,14 +11,12 @@ export const loader = () => {
             slug: "90s-mixtape",
             title: "A Mixtape I Made Just For You"
           }
-    ]), {
-    status: 200,
-    headers: {
-        "Content-Type": "application/json"
-    }
-    });
+    ], 200);
+}
+
+export const action: ActionFunction = ({request}) => {
     
-    return res
+    return json({METHOD: request.method}, 200);
 }
 
 // export default function Posts() {
